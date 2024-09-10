@@ -1,0 +1,16 @@
+
+body {
+    background-color: #343a40; 
+    color: white; 
+}
+
+.pagination .page-link {
+    background-color: #495057; /* Color oscuro para los botones de la paginación */
+    color: white; /* Texto blanco en los botones */
+    border: none; /* Sin bordes en los botones */
+}
+
+.pagination .active .page-link {
+    background-color: #007bff; /* Azul para el botón activo */
+    color: white; /* Texto blanco en el botón activo */
+}
