@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 
 export const ContainerAnime = ({ anime }) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const episodesPerPage = 50;
+    const episodesPerPage = 35;
 
-    // Calcular índices de episodios que se mostrarán en la página actual
     const indexOfLastEpisode = currentPage * episodesPerPage;
     const indexOfFirstEpisode = indexOfLastEpisode - episodesPerPage;
     const currentEpisodes = anime.episodes.slice(indexOfFirstEpisode, indexOfLastEpisode);
 
-    // Cambiar de página
     const handleNextPage = () => {
         if (indexOfLastEpisode < anime.episodes.length) {
             setCurrentPage(currentPage + 1);
@@ -23,30 +21,29 @@ export const ContainerAnime = ({ anime }) => {
     };
 
     return (
-        <div className="d-flex flex-row">
-            {/* Contenedor de la imagen y la sinopsis */}
-            <div className="p-2" style={{ width: '50%' }}>
-                <img src={anime.url} alt={anime.title} style={{ width: '100%' }} />
-                <h2>{anime.title}</h2>
-                <p>{anime.description}</p>
+        <div className="d-flex flex-row mt-5">
+            <div className="p-2 card h-100 bg-secondary-subtle" style={{ width: '50%' }}>
+                <img src={anime.url} className="card-img-top" alt={anime.title} style={{ width: '100%' }} />
+                <ul className="list-group list-group-flush">
+                    <li className="list-group-item list-group-item-secondary">
+                        <h2>{anime.title}</h2>
+                    </li>
+                    <li className="list-group-item">
+                        <p>{anime.description}</p>
+                    </li>
+                </ul>
             </div>
 
-            {/* Contenedor de la lista de episodios */}
             <div className="p-2">
                 <h3>Episodios</h3>
-                <ul>
-                    {currentEpisodes && currentEpisodes.length > 0 ? (
-                        currentEpisodes.map((episode) => (
-                            <li key={episode.number}>
-                                <strong>Episodio {episode.number}:</strong> {episode.title}
-                            </li>
-                        ))
-                    ) : (
-                        <p>No hay episodios disponibles.</p>
-                    )}
+                <ul className="list-group">
+                    {currentEpisodes.map((episode) => (
+                        <li key={episode.number} className="list-group-item list-group-item-secondary">
+                            <strong>Episodio {episode.number}:</strong> {episode.title}
+                        </li>
+                    ))}
                 </ul>
 
-                {/* Controles de paginación */}
                 <div className="pagination-controls mt-3">
                     <button
                         className="btn btn-outline-secondary me-2"
@@ -68,5 +65,3 @@ export const ContainerAnime = ({ anime }) => {
         </div>
     );
 };
-
-
